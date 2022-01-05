@@ -23,6 +23,7 @@ const useCustomForm = (props: LoginTypes) => {
 
   const handleInputSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    alert(JSON.stringify(form))
   }
 
   return {
@@ -58,7 +59,7 @@ export default function LandingPage() {
             </Typography>
             <TextField name="password" value={password} onChange={handleInputChange} fullWidth />
             <Box sx={{ my: 2 }}>
-              <Button fullWidth variant="contained" size="large">
+              <Button type="submit" fullWidth variant="contained" size="large">
                 Submit
               </Button>
             </Box>
