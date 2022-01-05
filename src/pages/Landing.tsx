@@ -1,17 +1,20 @@
 // @mui
-import { Container, Typography } from '@mui/material';
-// components
+import { Container, Typography, Button } from '@mui/material';
+// components0
 import Page from '../components/Page';
+import { useNavigate } from 'react-router'
 
 // ----------------------------------------------------------------------
 
 export default function LandingPage() {
+  const navigate = useNavigate();
   return (
     <Page title="Landing Page">
       <Container>
         <Typography variant="h3" component="h1" paragraph>
           Landing Page
         </Typography>
+        <Button fullWidth onClick={() => navigate('/login')}>to login</Button>
         <Typography gutterBottom>
           Curabitur turpis. Vestibulum facilisis, purus nec pulvinar iaculis, ligula mi congue nunc,
           vitae euismod ligula urna in dolor. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit
