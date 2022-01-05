@@ -7,52 +7,39 @@ import Page from '../components/Page';
 
 // ----------------------------------------------------------------------
 
-// function useForm(form){
-//   const [form, setForm] = useState(form)
-//   return {
-//     form,
-//     resetForm,
-//     handleChange
-//   }
-// }
-
-// interface Props {
-//   name: string;
-//   onExit: () => void;
-// }
-
-/* <LandingPage name="asdas" onExit={() => console.log }  /> */
-
-interface LoginForm {
-  form: {
-    email: string
-    password: string
-  }
+interface LoginTypes {
+  email: string;
+  password: string
 }
 
-const useCustomForm = (form: LoginForm) => {
+// custom hook form
+const useCustomForm = (props: LoginTypes) => {
+  const [form, setForm] = useState(props)
 
-  const [form, setForm] = useState("")
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setForm({ ...form, [e.target.name]: e.target.value })
+    console.log(form);
+  }
 
-  const resetForm = (form) => setForm(form)
+  const handleInputSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  }
 
   return {
     form,
-    resetForm,
-    handleSubmit
+    handleInputChange,
+    handleInputSubmit
   }
 }
 
 
 export default function LandingPage() {
-  // const { name, onExit } = props;
-  // const { form, handleChange } = useForm({email: ''})
+  const { form, handleInputChange, handleInputSubmit } = useCustomForm({ email: "", password: "" });
 
+  // const [email, setEmail] = useState<string>("");
+  // const [password, setPassword] = useState<string>("");
 
-  const [email, setEmail] = useState<string>("");
-  console.log(email);
-  const [password, setPassword] = useState<string>("");
-  console.log(password);
+  const { email, password } = form;
 
   return (
     <Page title="Login Page">
@@ -61,19 +48,21 @@ export default function LandingPage() {
           Login Page
         </Typography>
         <Box>
-          <Typography>
-            Email:
-          </Typography>
-          <TextField name="email" value={email} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)} fullWidth />
-          <Typography>
-            Password:
-          </Typography>
-          <TextField name="password" value={password} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)} fullWidth />
-          <Box sx={{ my: 2 }}>
-            <Button fullWidth variant="contained" size="large">
-              Submit
-            </Button>
-          </Box>
+          <form onSubmit={handleInputSubmit}>
+            <Typography>
+              Email:
+            </Typography>
+            <TextField name="email" value={email} onChange={handleInputChange} fullWidth />
+            <Typography>
+              Password:
+            </Typography>
+            <TextField name="password" value={password} onChange={handleInputChange} fullWidth />
+            <Box sx={{ my: 2 }}>
+              <Button fullWidth variant="contained" size="large">
+                Submit
+              </Button>
+            </Box>
+          </form>
         </Box>
       </Container>
     </Page>
