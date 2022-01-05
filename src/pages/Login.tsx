@@ -44,9 +44,9 @@ export default function LandingPage() {
 
   return (
     <Page title="Login Page">
-      <Container>
+      <Container sx={{ my: 4 }}>
         <Typography variant="h3" component="h1" paragraph>
-          Login Page
+          Login
         </Typography>
         <Box>
           <form onSubmit={handleInputSubmit}>

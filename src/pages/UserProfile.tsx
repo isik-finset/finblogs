@@ -1,33 +1,83 @@
+import React, { useState } from 'react';
 // @mui
-import { Container, Typography } from '@mui/material';
+import { Container, Typography, TextField, Box, Button } from '@mui/material';
 // components
 import Page from '../components/Page';
 
 // ----------------------------------------------------------------------
 
+interface UseProfileTypes {
+
+  firstName: string,
+  lastName: string,
+  email: string,
+  password: string
+
+}
+
+
+// use custom hook for controlling form
+
+const useFormHook = (props: UseProfileTypes) => {
+  const [form, setFrom] = useState(props);
+
+  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFrom({ ...form, [e.target.name]: e.target.value })
+    console.log(form);
+  }
+
+  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    alert(JSON.stringify(form))
+  }
+
+  return {
+    form,
+    handleFormChange,
+    handleFormSubmit
+
+  }
+}
+
+
 export default function UserProfilePage() {
+
+  const { form, handleFormChange, handleFormSubmit } = useFormHook({ firstName: "", lastName: "", email: "", password: "" })
+
+  const { firstName, lastName, email, password } = form;
+
   return (
     <Page title="User Profile Page">
       <Container>
-        <Typography variant="h3" component="h1" paragraph>
-          User Profile Page
-        </Typography>
-        <Typography gutterBottom>
-          Curabitur turpis. Vestibulum facilisis, purus nec pulvinar iaculis, ligula mi congue nunc,
-          vitae euismod ligula urna in dolor. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit
-          id, lorem. Phasellus blandit leo ut odio. Vestibulum ante ipsum primis in faucibus orci
-          luctus et ultrices posuere cubilia Curae; Fusce id purus. Aliquam lorem ante, dapibus in,
-          viverra quis, feugiat a, tellus. In consectetuer turpis ut velit. Aenean posuere, tortor
-          sed cursus feugiat, nunc augue blandit nunc, eu sollicitudin urna dolor sagittis lacus.
-          Vestibulum suscipit nulla quis orci. Nam commodo suscipit quam. Sed a libero.
-        </Typography>
-        <Typography>
-          Praesent ac sem eget est egestas volutpat. Phasellus viverra nulla ut metus varius
-          laoreet. Curabitur ullamcorper ultricies nisi. Ut non enim eleifend felis pretium feugiat.
-          Donec mi odio, faucibus at, scelerisque quis, convallis in, nisi. Fusce vel dui. Quisque
-          libero metus, condimentum nec, tempor a, commodo mollis, magna. In enim justo, rhoncus ut,
-          imperdiet a, venenatis vitae, justo. Cras dapibus.
-        </Typography>
+        <Box>
+          <form onSubmit={handleFormSubmit}>
+            <Typography variant="h3" component="h1" paragraph>
+              User Profile Page
+            </Typography>
+            <Typography>
+              First Name:
+            </Typography>
+            <TextField fullWidth name="firstName" value={firstName} onChange={handleFormChange} />
+            <Typography>
+              Last Name:
+            </Typography>
+            <TextField fullWidth name="lastName" value={lastName} onChange={handleFormChange} />
+            <Typography>
+              Email:
+            </Typography>
+            <TextField fullWidth name="email" value={email} onChange={handleFormChange} />
+            <Typography>
+              Password
+            </Typography>
+            <TextField fullWidth name="password" value={password} onChange={handleFormChange} />
+            <Box sx={{ my: 2 }}>
+              <Button fullWidth variant="contained" size="large" type="submit">
+                Sign Up
+              </Button>
+            </Box>
+          </form>
+        </Box>
+
       </Container>
     </Page>
   );
