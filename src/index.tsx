@@ -11,12 +11,20 @@ import { HelmetProvider } from 'react-helmet-async';
 //
 import App from './App';
 
+
+// providers
+import TokenProvider from './providers'
+
 // ----------------------------------------------------------------------
 
 ReactDOM.render(
   <HelmetProvider>
     <BrowserRouter>
-      <App />
+      {/* // context provider should go in here */}
+      <TokenProvider>
+        <App />
+      </TokenProvider>
+      {/* // context provider should go in here */}
     </BrowserRouter>
   </HelmetProvider>,
   document.getElementById('root')

@@ -1,46 +1,51 @@
-import React, { useState } from 'react'
 // @mui
 import { Container, Typography, TextField, Box, Button } from '@mui/material';
-
 // components
 import Page from '../components/Page';
+// hooks
+import useLogin from 'src/hooks/useLogin';
+// axios
+import axiosInstance from 'src/utils/axios';
+import React, { useContext } from 'react';
+// import { useAuth } from 'src/hooks/useAuth'
 
+// provider
+import { TokenContext } from 'src/providers';
+
+// context
+import { setSession } from 'src/utils/jwt';
 // ----------------------------------------------------------------------
-
-interface LoginTypes {
-  email: string;
-  password: string
-}
-
-// custom hook form
-const useCustomForm = (props: LoginTypes) => {
-  const [form, setForm] = useState(props)
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value })
-    console.log(form);
-  }
-
-  const handleInputSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    alert(JSON.stringify(form))
-  }
-
-  return {
-    form,
-    handleInputChange,
-    handleInputSubmit
-  }
-}
 
 
 export default function LandingPage() {
-  const { form, handleInputChange, handleInputSubmit } = useCustomForm({ email: "", password: "" });
+  const defaultValues = {
+    email: "",
+    password: "",
+  }
 
-  // const [email, setEmail] = useState<string>("");
-  // const [password, setPassword] = useState<string>("");
-
+  const { token, updateToken } = useContext(TokenContext);
+  const { form, handleChange } = useLogin(defaultValues);
   const { email, password } = form;
+  // const { login, user, isAuth }  = useAuth();
+
+  const onSubmit = async (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
+    try {
+      const result = await axiosInstance.post('/api/account/login', {
+        email: form.email,
+        password: form.password
+      })
+      if (result.status === 200) {
+        console.log('you can add rerouting in here');
+        console.log(result);
+        updateToken(result.data.accessToken)
+        setSession(token)
+      }
+    } catch (e) {
+      alert('there is something wrong')
+    }
+
+  }
 
   return (
     <Page title="Login Page">
@@ -49,21 +54,21 @@ export default function LandingPage() {
           Login
         </Typography>
         <Box>
-          <form onSubmit={handleInputSubmit}>
-            <Typography>
-              Email:
-            </Typography>
-            <TextField name="email" value={email} onChange={handleInputChange} fullWidth />
-            <Typography>
-              Password:
-            </Typography>
-            <TextField name="password" value={password} onChange={handleInputChange} fullWidth />
-            <Box sx={{ my: 2 }}>
-              <Button type="submit" fullWidth variant="contained" size="large">
-                Submit
-              </Button>
-            </Box>
-          </form>
+
+          <Typography>
+            Email:
+          </Typography>
+          <TextField name="email" value={email} onChange={handleChange} fullWidth />
+          <Typography>
+            Password:
+          </Typography>
+          <TextField name="password" value={password} onChange={handleChange} fullWidth />
+          <Box sx={{ my: 2 }}>
+            <Button component="button" onClick={onSubmit} fullWidth variant="contained" size="large">
+              Submit
+            </Button>
+          </Box>
+
         </Box>
       </Container>
     </Page>
