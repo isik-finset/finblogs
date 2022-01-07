@@ -38,8 +38,13 @@ export default function LandingPage() {
       if (result.status === 200) {
         console.log('you can add rerouting in here');
         console.log(result);
-        updateToken(result.data.accessToken)
-        setSession(token)
+        localStorage.setItem('tokenFromContext', token);
+        localStorage.setItem('tokenFromBE', result.data.accessToken)
+        localStorage.setItem('userData', result.data.user)
+
+        // Todo by Monday
+        // updateToken(result.data.accessToken)
+        // setSession(token)
       }
     } catch (e) {
       alert('there is something wrong')

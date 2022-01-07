@@ -18,30 +18,37 @@ const TokenProvider: FC = ({ children }) => {
     // const [isInit, setIsInit] = useState<boolean>(false);
     const updateToken = (newToken: string) => setToken(newToken);
 
-    async function init() {
 
-        // check localStorage
-        // isValidToken check
+    // Todo by Monday
+    // async function init() {
 
-        // request
+    //     // check localStorage
+    //     // isValidToken check
 
-        // handle logic
+    //     // request
 
-        // update state
+    //     // handle logic
 
-    }
+    //     // update state
 
-    async function login() {
-        // login
-    }
+    // }
 
-    useEffect(() => {
-        init();
-    }, [])
+    // async function login() {
+    //     // login
+    // }
 
+    // useEffect(() => {
+    //     init();
+    // }, [])
 
+    // Todo by Monday
+    // return (
+    //     <TokenContext.Provider value={{ login: () => { }, isAuth: false }} >
+    //         {children}
+    //     </TokenContext.Provider>
+    // )
     return (
-        <TokenContext.Provider value={{ login: () => { }, isAuth: false }} >
+        <TokenContext.Provider value={{ token, updateToken }}>
             {children}
         </TokenContext.Provider>
     )
