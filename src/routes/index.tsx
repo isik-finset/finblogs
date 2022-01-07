@@ -8,11 +8,11 @@ import LoadingScreen from '../components/LoadingScreen';
 // ----------------------------------------------------------------------
 
 const Loadable = (Component: ElementType) => (props: any) =>
-  (
-    <Suspense fallback={<LoadingScreen />}>
-      <Component {...props} />
-    </Suspense>
-  );
+(
+  <Suspense fallback={<LoadingScreen />}>
+    <Component {...props} />
+  </Suspense>
+);
 
 export default function Router() {
   return useRoutes([
@@ -23,7 +23,7 @@ export default function Router() {
         { element: <Navigate to="/landing" replace />, index: true },
         { path: '/landing', element: <LandingPage /> },
         { path: '/login', element: <LoginPage /> },
-        { path: '/user-profile', element: <UserProfilePage /> },
+        { path: '/user-profile', element: <UserProfilePage /> }, // protected route
       ],
     },
     {
@@ -43,3 +43,5 @@ const LandingPage = Loadable(lazy(() => import('../pages/Landing')));
 const LoginPage = Loadable(lazy(() => import('../pages/Login')));
 const UserProfilePage = Loadable(lazy(() => import('../pages/UserProfile')));
 const NotFound = Loadable(lazy(() => import('../pages/Page404')));
+
+

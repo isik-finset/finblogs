@@ -6,7 +6,7 @@ import Page from '../components/Page';
 import useLogin from 'src/hooks/useLogin';
 // axios
 import axiosInstance from 'src/utils/axios';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 // import { useAuth } from 'src/hooks/useAuth'
 
 // provider
@@ -46,6 +46,7 @@ export default function LandingPage() {
     }
 
   }
+  // https://medium.com/geekculture/how-to-use-context-api-and-jwt-to-maintain-user-sessions-eb5602e83a03
 
   return (
     <Page title="Login Page">

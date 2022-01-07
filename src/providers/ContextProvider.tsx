@@ -1,9 +1,10 @@
-import React, { useState, createContext, FC } from 'react';
+import React, { useState, createContext, FC, useEffect } from 'react';
 import { TokenContextState } from 'src/types/types';
 
 const contextDefaultValues: TokenContextState = {
     token: "",
-    updateToken: () => { }
+    updateToken: () => { },
+    // login: (params: Record<string, string>) => void
 
 };
 
@@ -13,11 +14,34 @@ export const TokenContext = createContext<TokenContextState>(
 
 const TokenProvider: FC = ({ children }) => {
     const [token, setToken] = useState<string>(contextDefaultValues.token)
-
+    // user
+    // const [isInit, setIsInit] = useState<boolean>(false);
     const updateToken = (newToken: string) => setToken(newToken);
 
+    async function init() {
+
+        // check localStorage
+        // isValidToken check
+
+        // request
+
+        // handle logic
+
+        // update state
+
+    }
+
+    async function login() {
+        // login
+    }
+
+    useEffect(() => {
+        init();
+    }, [])
+
+
     return (
-        <TokenContext.Provider value={{ token, updateToken }} >
+        <TokenContext.Provider value={{ login: () => { }, isAuth: false }} >
             {children}
         </TokenContext.Provider>
     )

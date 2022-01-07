@@ -1,4 +1,4 @@
 export type TokenContextState = {
     token: string;
-    updateToken: (name: string) => void;
+    updateToken: (newToken: string) => void;
 };
