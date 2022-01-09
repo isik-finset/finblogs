@@ -14,8 +14,10 @@ export const TokenContext = createContext<TokenContextState>(
 
 const TokenProvider: FC = ({ children }) => {
     const [token, setToken] = useState<string>(contextDefaultValues.token)
+
+
     // user
-    // const [isInit, setIsInit] = useState<boolean>(false);
+    const [isInit, setIsInit] = useState<boolean>(false);
     const updateToken = (newToken: string) => setToken(newToken);
 
 
@@ -32,14 +34,24 @@ const TokenProvider: FC = ({ children }) => {
     //     // update state
 
     // }
+    const init = async () => {
+        const userToken = localStorage.getItem('isInit')
+
+        if (userToken) {
+            setIsInit(true);
+        } else {
+            setIsInit(false)
+        }
+    }
 
     // async function login() {
     //     // login
     // }
 
-    // useEffect(() => {
-    //     init();
-    // }, [])
+    useEffect(() => {
+        init();
+    }, [])
+    console.log(isInit);
 
     // Todo by Monday
     // return (
