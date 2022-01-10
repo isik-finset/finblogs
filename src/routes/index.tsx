@@ -1,9 +1,11 @@
 import { Suspense, lazy, ElementType } from 'react';
-import { Navigate, useRoutes } from 'react-router-dom';
+import type { RouteObject } from 'react-router';
+import { Navigate } from 'react-router-dom';
 // layouts
 import MainLayout from '../layouts/MainLayout';
 // components
 import LoadingScreen from '../components/LoadingScreen';
+
 
 // ----------------------------------------------------------------------
 
@@ -14,8 +16,8 @@ const Loadable = (Component: ElementType) => (props: any) =>
   </Suspense>
 );
 
-export default function Router() {
-  return useRoutes([
+export default function Router(isAuth: boolean) {
+  const routes: RouteObject[] = [
     {
       path: '/',
       element: <MainLayout />,
@@ -23,7 +25,8 @@ export default function Router() {
         { element: <Navigate to="/landing" replace />, index: true },
         { path: '/landing', element: <LandingPage /> },
         { path: '/login', element: <LoginPage /> },
-        { path: '/user-profile', element: <UserProfilePage /> }, // protected route
+        { path: '/register', element: <Register /> },
+        { path: '/user-profile', element: !isAuth ? <LoginPage /> : < UserProfilePage /> }, // protected route
       ],
     },
     {
@@ -35,7 +38,10 @@ export default function Router() {
       ],
     },
     { path: '*', element: <Navigate to="/404" replace /> },
-  ]);
+  ];
+
+  return routes
+
 }
 
 // Routes
@@ -43,5 +49,6 @@ const LandingPage = Loadable(lazy(() => import('../pages/Landing')));
 const LoginPage = Loadable(lazy(() => import('../pages/Login')));
 const UserProfilePage = Loadable(lazy(() => import('../pages/UserProfile')));
 const NotFound = Loadable(lazy(() => import('../pages/Page404')));
+const Register = Loadable(lazy(() => import('../pages/Register')))
 
 

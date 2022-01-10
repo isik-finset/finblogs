@@ -1,50 +1,65 @@
 // @mui
-import { Container, Typography, TextField, Box, Button } from '@mui/material';
+import { Container, Typography, Box } from '@mui/material';
 // components
 import Page from '../components/Page';
-// hooks
-import useRegister from 'src/hooks/useRegister';
+// context related
+import { useContext } from 'react';
+import { TokenContext } from 'src/providers';
 
 // ----------------------------------------------------------------------
 
 export default function UserProfilePage() {
 
-  const { form, handleChange, handleSubmit } = useRegister({ firstName: "", lastName: "", email: "", password: "" })
-  const { firstName, lastName, email, password } = form;
+  const { user } = useContext(TokenContext);
+  console.log(user);
 
   return (
     <Page title="User Profile Page">
       <Container>
         <Box>
-          <form onSubmit={handleSubmit}>
-            <Typography variant="h3" component="h1" paragraph>
-              User Profile Page
-            </Typography>
-            <Typography>
-              First Name:
-            </Typography>
-            <TextField fullWidth name="firstName" value={firstName} onChange={handleChange} />
-            <Typography>
-              Last Name:
-            </Typography>
-            <TextField fullWidth name="lastName" value={lastName} onChange={handleChange} />
-            <Typography>
-              Email:
-            </Typography>
-            <TextField fullWidth name="email" value={email} onChange={handleChange} />
-            <Typography>
-              Password
-            </Typography>
-            <TextField fullWidth name="password" value={password} onChange={handleChange} />
-            <Box sx={{ my: 2 }}>
-              <Button fullWidth variant="contained" size="large" type="submit">
-                Sign Up
-              </Button>
-            </Box>
-          </form>
+          <Typography variant="h3" component="h1" paragraph>
+            User Profile Page
+          </Typography>
+          <Typography>
+            About:
+          </Typography>
+          <Typography>
+            {user.about}
+          </Typography>
+          <Typography>
+            Address:
+          </Typography>
+          <Typography>
+            {user.address}
+          </Typography>
+          <Typography>
+            City:
+          </Typography>
+          <Typography>
+            {user.city}
+          </Typography>
+          <Typography>
+            Country:
+          </Typography>
+          <Typography>
+            {user.country}
+          </Typography>
+          <Typography>
+            Name:
+          </Typography>
+          <Typography>
+            {user.displayName}
+          </Typography>
+          <Typography>
+            ID:
+          </Typography>
+          <Typography>
+            {user.id}
+          </Typography>
         </Box>
-
       </Container>
     </Page>
-  );
+  )
+
+
 }

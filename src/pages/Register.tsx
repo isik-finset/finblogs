@@ -18,7 +18,7 @@ export default function Register() {
                 <Box>
                     <form onSubmit={handleSubmit}>
                         <Typography variant="h3" component="h1" paragraph>
-                            User Profile Page
+                            Register Page
                         </Typography>
                         <Typography>
                             First Name:

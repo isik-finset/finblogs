@@ -1,11 +1,23 @@
 import React, { useState, createContext, FC, useEffect } from 'react';
 import { TokenContextState } from 'src/types/types';
+import { useNavigate } from 'react-router-dom';
+import axiosInstance from 'src/utils/axios';
 
 const contextDefaultValues: TokenContextState = {
+    user: {
+        about: "",
+        address: "",
+        city: "",
+        country: "",
+        displayName: "",
+        email: "",
+        id: "",
+    },
     token: "",
+    isAuth: false,
+    updateUser: () => { },
     updateToken: () => { },
-    // login: (params: Record<string, string>) => void
-
+    updateAuth: () => { }
 };
 
 export const TokenContext = createContext<TokenContextState>(
@@ -13,54 +25,70 @@ export const TokenContext = createContext<TokenContextState>(
 );
 
 const TokenProvider: FC = ({ children }) => {
+
+
+    // global states
+    const [isAuth, setIsAuth] = useState<boolean>(false);
     const [token, setToken] = useState<string>(contextDefaultValues.token)
+    const [user, setUser] = useState(contextDefaultValues.user)
+
+    const navigate = useNavigate();
 
 
-    // user
-    const [isInit, setIsInit] = useState<boolean>(false);
-    const updateToken = (newToken: string) => setToken(newToken);
+    // initialRender: validUserToken ? authorize : don't authorize
+    useEffect(() => {
+        const init = async () => {
+            const userToken = localStorage.getItem('token')
+            userToken ? updateAuth() : setIsAuth(false)
+        }
+
+        init();
+    }, [])
+    console.log(isAuth);
 
 
-    // Todo by Monday
-    // async function init() {
 
-    //     // check localStorage
-    //     // isValidToken check
+    // upon receiving a token, update global state & 
+    const updateToken = (newToken: string) => {
+        setToken(newToken)
+        console.log(newToken);
+        localStorage.setItem('token', newToken)
+        updateAuth()
+        userData(newToken)
+        // navigate('/user-profile')
+    };
 
-    //     // request
 
-    //     // handle logic
+    const updateAuth = () => {
+        setIsAuth(true)
+    }
 
-    //     // update state
 
-    // }
-    const init = async () => {
-        const userToken = localStorage.getItem('isInit')
 
-        if (userToken) {
-            setIsInit(true);
-        } else {
-            setIsInit(false)
+    const updateUser = (newUser: {}) => { setUser(newUser) };
+    // userProfile req
+    const userData = async (input: string) => {
+        try {
+            console.log('try code running');
+            const result = await axiosInstance.get('/api/account/user-profile', {
+                headers: {
+                    'Authorization': `Bearer ${input}`
+                }
+            })
+            if (result.status === 200) {
+                console.log(result);
+                updateUser(result.data.user)
+                navigate('/user-profile')
+            }
+        } catch (e) {
+            alert('there is something wrong')
         }
     }
 
-    // async function login() {
-    //     // login
-    // }
 
-    useEffect(() => {
-        init();
-    }, [])
-    console.log(isInit);
 
-    // Todo by Monday
-    // return (
-    //     <TokenContext.Provider value={{ login: () => { }, isAuth: false }} >
-    //         {children}
-    //     </TokenContext.Provider>
-    // )
     return (
-        <TokenContext.Provider value={{ token, updateToken }}>
+        <TokenContext.Provider value={{ user, isAuth, token, updateToken, updateAuth, updateUser }}>
             {children}
         </TokenContext.Provider>
     )

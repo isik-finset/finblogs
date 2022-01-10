@@ -6,16 +6,19 @@ import Page from '../components/Page';
 import useLogin from 'src/hooks/useLogin';
 // axios
 import axiosInstance from 'src/utils/axios';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 // import { useAuth } from 'src/hooks/useAuth'
 
 // provider
 import { TokenContext } from 'src/providers';
 
-// context
-import { setSession } from 'src/utils/jwt';
 // ----------------------------------------------------------------------
 
+
+// Guards
+// useReducer
+// improve router
+// validation - login
 
 export default function LandingPage() {
   const defaultValues = {
@@ -23,7 +26,7 @@ export default function LandingPage() {
     password: "",
   }
 
-  const { token, updateToken } = useContext(TokenContext);
+  const { updateToken } = useContext(TokenContext);
   const { form, handleChange } = useLogin(defaultValues);
   const { email, password } = form;
   // const { login, user, isAuth }  = useAuth();
@@ -36,15 +39,9 @@ export default function LandingPage() {
         password: form.password
       })
       if (result.status === 200) {
-        console.log('you can add rerouting in here');
         console.log(result);
-        localStorage.setItem('tokenFromContext', token);
-        localStorage.setItem('tokenFromBE', result.data.accessToken)
-        localStorage.setItem('userData', result.data.user)
-
-        // Todo by Monday
-        // updateToken(result.data.accessToken)
-        // setSession(token)
+        updateToken(result.data.accessToken)
+        console.log(result.data.accessToken);
       }
     } catch (e) {
       alert('there is something wrong')
