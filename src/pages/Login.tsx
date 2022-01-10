@@ -6,7 +6,7 @@ import Page from '../components/Page';
 import useLogin from 'src/hooks/useLogin';
 // axios
 import axiosInstance from 'src/utils/axios';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 // import { useAuth } from 'src/hooks/useAuth'
 
 // provider
@@ -18,7 +18,7 @@ import { TokenContext } from 'src/providers';
 // Guards
 // useReducer
 // improve router
-// validation - login
+// validation - login regex : done
 
 export default function LandingPage() {
   const defaultValues = {
@@ -27,24 +27,38 @@ export default function LandingPage() {
   }
 
   const { updateToken } = useContext(TokenContext);
-  const { form, handleChange } = useLogin(defaultValues);
+  const { form, handleChange, emailValidation } = useLogin(defaultValues);
   const { email, password } = form;
-  // const { login, user, isAuth }  = useAuth();
+
+  // states
+  const [isValid, setIsValid] = useState(false);
+  const [message, setMessage] = useState("");
+
+
 
   const onSubmit = async (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
-    try {
-      const result = await axiosInstance.post('/api/account/login', {
-        email: form.email,
-        password: form.password
-      })
-      if (result.status === 200) {
-        console.log(result);
-        updateToken(result.data.accessToken)
-        console.log(result.data.accessToken);
+    const isEmailValid = emailValidation(form.email);
+    isEmailValid ? setMessage("Email address is valid") : setMessage("Email address is invalid")
+
+
+    if (isEmailValid) {
+      setIsValid(true)
+      try {
+        const result = await axiosInstance.post('/api/account/login', {
+          email: form.email,
+          password: form.password
+        })
+        if (result.status === 200) {
+          console.log(result);
+          updateToken(result.data.accessToken)
+          console.log(result.data.accessToken);
+        }
+      } catch (e) {
+        alert('there is something wrong')
       }
-    } catch (e) {
-      alert('there is something wrong')
+    } else {
+      setIsValid(false)
     }
 
   }
@@ -62,6 +76,9 @@ export default function LandingPage() {
             Email:
           </Typography>
           <TextField name="email" value={email} onChange={handleChange} fullWidth />
+          <Typography sx={{ color: isValid ? 'green' : 'red' }}>
+            {message}
+          </Typography>
           <Typography>
             Password:
           </Typography>

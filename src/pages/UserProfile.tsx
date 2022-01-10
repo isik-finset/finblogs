@@ -1,14 +1,17 @@
 // @mui
-import { Container, Typography, Box } from '@mui/material';
+import { Container, Typography, Box, Button } from '@mui/material';
 // components
 import Page from '../components/Page';
 // context related
 import { useContext } from 'react';
 import { TokenContext } from 'src/providers';
+import { useNavigate } from 'react-router';
 
 // ----------------------------------------------------------------------
 
 export default function UserProfilePage() {
+
+  const navigate = useNavigate();
 
   const { user } = useContext(TokenContext);
   console.log(user);
@@ -56,6 +59,12 @@ export default function UserProfilePage() {
           <Typography>
             {user.id}
           </Typography>
+
+          <Box>
+            <Button variant="contained" onClick={() => navigate("/register")}>
+              Go to Register
+            </Button>
+          </Box>
         </Box>
       </Container>
     </Page>
