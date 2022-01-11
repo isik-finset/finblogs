@@ -1,10 +1,12 @@
 import { Suspense, lazy, ElementType } from 'react';
-import type { RouteObject } from 'react-router';
+import { useRoutes } from 'react-router';
 import { Navigate } from 'react-router-dom';
 // layouts
 import MainLayout from '../layouts/MainLayout';
 // components
 import LoadingScreen from '../components/LoadingScreen';
+// Guard
+import PrivateRoute from './PrivateRoute';
 
 
 // ----------------------------------------------------------------------
@@ -16,8 +18,8 @@ const Loadable = (Component: ElementType) => (props: any) =>
   </Suspense>
 );
 
-export default function Router(isAuth: boolean) {
-  const routes: RouteObject[] = [
+export default function Router() {
+  return useRoutes([
     {
       path: '/',
       element: <MainLayout />,
@@ -26,7 +28,7 @@ export default function Router(isAuth: boolean) {
         { path: '/landing', element: <LandingPage /> },
         { path: '/login', element: <LoginPage /> },
         { path: '/register', element: <Register /> },
-        { path: '/user-profile', element: !isAuth ? <LoginPage /> : < UserProfilePage /> }, // protected route
+        { path: '/user-profile', element: <PrivateRoute><UserProfilePage /></PrivateRoute> }, // protected route
       ],
     },
     {
@@ -38,9 +40,8 @@ export default function Router(isAuth: boolean) {
       ],
     },
     { path: '*', element: <Navigate to="/404" replace /> },
-  ];
+  ])
 
-  return routes
 
 }
 

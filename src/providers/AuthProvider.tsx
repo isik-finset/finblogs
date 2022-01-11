@@ -24,7 +24,7 @@ export const TokenContext = createContext<TokenContextState>(
     contextDefaultValues
 );
 
-const TokenProvider: FC = ({ children }) => {
+const AuthProvider: FC = ({ children }) => {
 
 
     // global states
@@ -32,7 +32,10 @@ const TokenProvider: FC = ({ children }) => {
     const [token, setToken] = useState<string>(contextDefaultValues.token)
     const [user, setUser] = useState(contextDefaultValues.user)
 
+    // helper methods
+    const updateAuth = () => setIsAuth(true)
     const navigate = useNavigate();
+    const updateUser = (newUser: {}) => { setUser(newUser) };
 
 
     // initialRender: validUserToken ? authorize : don't authorize
@@ -44,39 +47,27 @@ const TokenProvider: FC = ({ children }) => {
 
         init();
     }, [])
-    console.log(isAuth);
 
 
 
-    // upon receiving a token, update global state & 
+    // upon receiving a token, update global state and send user data request
     const updateToken = (newToken: string) => {
         setToken(newToken)
-        console.log(newToken);
         localStorage.setItem('token', newToken)
         updateAuth()
-        userData(newToken)
-        // navigate('/user-profile')
+        fetchUserData(newToken)
     };
 
 
-    const updateAuth = () => {
-        setIsAuth(true)
-    }
-
-
-
-    const updateUser = (newUser: {}) => { setUser(newUser) };
-    // userProfile req
-    const userData = async (input: string) => {
+    // fetch user profile data
+    const fetchUserData = async (input: string) => {
         try {
-            console.log('try code running');
             const result = await axiosInstance.get('/api/account/user-profile', {
                 headers: {
                     'Authorization': `Bearer ${input}`
                 }
             })
             if (result.status === 200) {
-                console.log(result);
                 updateUser(result.data.user)
                 navigate('/user-profile')
             }
@@ -95,5 +86,5 @@ const TokenProvider: FC = ({ children }) => {
 
 };
 
-export default TokenProvider;
+export default AuthProvider;
 

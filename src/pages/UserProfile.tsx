@@ -2,19 +2,17 @@
 import { Container, Typography, Box, Button } from '@mui/material';
 // components
 import Page from '../components/Page';
-// context related
-import { useContext } from 'react';
-import { TokenContext } from 'src/providers';
+// router
 import { useNavigate } from 'react-router';
+// hooks
+import useAuth from 'src/hooks/useAuth';
 
 // ----------------------------------------------------------------------
 
 export default function UserProfilePage() {
 
   const navigate = useNavigate();
-
-  const { user } = useContext(TokenContext);
-  console.log(user);
+  const { user } = useAuth();
 
   return (
     <Page title="User Profile Page">

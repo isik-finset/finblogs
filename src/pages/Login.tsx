@@ -4,20 +4,17 @@ import { Container, Typography, TextField, Box, Button } from '@mui/material';
 import Page from '../components/Page';
 // hooks
 import useLogin from 'src/hooks/useLogin';
+import useAuth from 'src/hooks/useAuth';
 // axios
 import axiosInstance from 'src/utils/axios';
-import React, { useContext, useState } from 'react';
-// import { useAuth } from 'src/hooks/useAuth'
-
-// provider
-import { TokenContext } from 'src/providers';
+// react
+import React, { useState } from 'react';
 
 // ----------------------------------------------------------------------
 
-
-// Guards
+// Guards : done
 // useReducer
-// improve router
+// improve router : done
 // validation - login regex : done
 
 export default function LandingPage() {
@@ -26,16 +23,16 @@ export default function LandingPage() {
     password: "",
   }
 
-  const { updateToken } = useContext(TokenContext);
-  const { form, handleChange, emailValidation } = useLogin(defaultValues);
-  const { email, password } = form;
-
   // states
   const [isValid, setIsValid] = useState(false);
   const [message, setMessage] = useState("");
 
+  // hooks
+  const { updateToken } = useAuth();
+  const { form, handleChange, emailValidation } = useLogin(defaultValues);
 
 
+  // submit form -> validate -> login
   const onSubmit = async (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
     const isEmailValid = emailValidation(form.email);
@@ -75,14 +72,14 @@ export default function LandingPage() {
           <Typography>
             Email:
           </Typography>
-          <TextField name="email" value={email} onChange={handleChange} fullWidth />
+          <TextField name="email" value={form.email} onChange={handleChange} fullWidth />
           <Typography sx={{ color: isValid ? 'green' : 'red' }}>
             {message}
           </Typography>
           <Typography>
             Password:
           </Typography>
-          <TextField name="password" value={password} onChange={handleChange} fullWidth />
+          <TextField name="password" value={form.password} onChange={handleChange} fullWidth />
           <Box sx={{ my: 2 }}>
             <Button component="button" onClick={onSubmit} fullWidth variant="contained" size="large">
               Submit

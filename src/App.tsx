@@ -1,5 +1,6 @@
 // routes
 import Router from './routes';
+
 // theme
 import ThemeProvider from './theme';
 
@@ -7,16 +8,7 @@ import ThemeProvider from './theme';
 import ScrollToTop from './components/ScrollToTop';
 import { ProgressBarStyle } from './components/ProgressBar';
 
-// react
-import React, { useContext } from 'react'
-
-// react-router-dom
-import { useRoutes } from 'react-router-dom';
-import { TokenContext } from './providers';
-
-
 // ----------------------------------------------------------------------
-
 
 
 export default function App() {
@@ -25,17 +17,17 @@ export default function App() {
   // create useAuth hook to substitute const { isAuth } = useContext(TokenContext);
 
 
-  const { isAuth } = useContext(TokenContext);
+  // const { isAuth } = useAuth();
 
   // init protected routes
-  const routes = useRoutes(Router(isAuth))
+  // const routes = useRoutes(Router(isAuth))
 
 
   return (
     <ThemeProvider>
       <ProgressBarStyle />
       <ScrollToTop />
-      {routes}
+      <Router />
     </ThemeProvider>
   );
 }
