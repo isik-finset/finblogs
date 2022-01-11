@@ -9,6 +9,8 @@ import useAuth from 'src/hooks/useAuth';
 import axiosInstance from 'src/utils/axios';
 // react
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 
 // ----------------------------------------------------------------------
 
@@ -22,6 +24,9 @@ export default function LandingPage() {
     email: "",
     password: "",
   }
+
+
+  const navigate = useNavigate();
 
   // states
   const [isValid, setIsValid] = useState(false);
@@ -41,6 +46,7 @@ export default function LandingPage() {
 
     if (isEmailValid) {
       setIsValid(true)
+      // logIn(form)
       try {
         const result = await axiosInstance.post('/api/account/login', {
           email: form.email,
@@ -50,6 +56,7 @@ export default function LandingPage() {
           console.log(result);
           updateToken(result.data.accessToken)
           console.log(result.data.accessToken);
+          navigate('/user-profile')
         }
       } catch (e) {
         alert('there is something wrong')

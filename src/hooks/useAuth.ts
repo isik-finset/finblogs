@@ -3,13 +3,11 @@ import { useContext } from "react";
 
 export default function useAuth () {
 
-    const { user, token, isAuth, updateUser, updateAuth, updateToken } = useContext(TokenContext)
+    const { user, isAuth, updateUser, updateToken } = useContext(TokenContext)
 
     return {
         user,
-        token,
         isAuth,
-        updateAuth,
         updateUser,
         updateToken
     }

@@ -13,11 +13,9 @@ const contextDefaultValues: TokenContextState = {
         email: "",
         id: "",
     },
-    token: "",
     isAuth: false,
     updateUser: () => { },
     updateToken: () => { },
-    updateAuth: () => { }
 };
 
 export const TokenContext = createContext<TokenContextState>(
@@ -29,12 +27,10 @@ const AuthProvider: FC = ({ children }) => {
 
     // global states
     const [isAuth, setIsAuth] = useState<boolean>(false);
-    const [token, setToken] = useState<string>(contextDefaultValues.token)
     const [user, setUser] = useState(contextDefaultValues.user)
+    console.log(isAuth);
 
     // helper methods
-    const updateAuth = () => setIsAuth(true)
-    const navigate = useNavigate();
     const updateUser = (newUser: {}) => { setUser(newUser) };
 
 
@@ -42,7 +38,7 @@ const AuthProvider: FC = ({ children }) => {
     useEffect(() => {
         const init = async () => {
             const userToken = localStorage.getItem('token')
-            userToken ? updateAuth() : setIsAuth(false)
+            userToken ? fetchUserData(userToken) : setIsAuth(false)
         }
 
         init();
@@ -52,15 +48,14 @@ const AuthProvider: FC = ({ children }) => {
 
     // upon receiving a token, update global state and send user data request
     const updateToken = (newToken: string) => {
-        setToken(newToken)
         localStorage.setItem('token', newToken)
-        updateAuth()
         fetchUserData(newToken)
     };
 
 
     // fetch user profile data
     const fetchUserData = async (input: string) => {
+        setIsAuth(true)
         try {
             const result = await axiosInstance.get('/api/account/user-profile', {
                 headers: {
@@ -69,7 +64,7 @@ const AuthProvider: FC = ({ children }) => {
             })
             if (result.status === 200) {
                 updateUser(result.data.user)
-                navigate('/user-profile')
+                // navigate('/user-profile') // think of a way to force the navigation from inside the Guards
             }
         } catch (e) {
             alert('there is something wrong')
@@ -77,9 +72,8 @@ const AuthProvider: FC = ({ children }) => {
     }
 
 
-
     return (
-        <TokenContext.Provider value={{ user, isAuth, token, updateToken, updateAuth, updateUser }}>
+        <TokenContext.Provider value={{ user, isAuth, updateToken, updateUser }}>
             {children}
         </TokenContext.Provider>
     )

@@ -9,8 +9,6 @@ export type TokenContextState = {
         id?: string
     };
     updateUser: (name: string) => void;
-    token: string;
     updateToken: (newToken: string) => void;
     isAuth: boolean;
-    updateAuth: (token: string) => void;
 };
