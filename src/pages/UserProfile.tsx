@@ -2,8 +2,6 @@
 import { Container, Typography, Box, Button } from '@mui/material';
 // components
 import Page from '../components/Page';
-// router
-import { useNavigate } from 'react-router';
 // hooks
 import useAuth from 'src/hooks/useAuth';
 
@@ -11,8 +9,7 @@ import useAuth from 'src/hooks/useAuth';
 
 export default function UserProfilePage() {
 
-  const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user, logOut } = useAuth();
 
   return (
     <Page title="User Profile Page">
@@ -59,8 +56,8 @@ export default function UserProfilePage() {
           </Typography>
 
           <Box>
-            <Button variant="contained" onClick={() => navigate("/register")}>
-              Go to Register
+            <Button variant="contained" onClick={() => logOut()}>
+              LogOut
             </Button>
           </Box>
         </Box>

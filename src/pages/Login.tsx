@@ -33,7 +33,7 @@ export default function LandingPage() {
   const [message, setMessage] = useState("");
 
   // hooks
-  const { updateToken } = useAuth();
+  const { logIn } = useAuth();
   const { form, handleChange, emailValidation } = useLogin(defaultValues);
 
 
@@ -54,7 +54,7 @@ export default function LandingPage() {
         })
         if (result.status === 200) {
           console.log(result);
-          updateToken(result.data.accessToken)
+          logIn(result.data.accessToken)
           console.log(result.data.accessToken);
           navigate('/user-profile')
         }
