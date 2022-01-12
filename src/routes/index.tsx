@@ -29,6 +29,10 @@ export default function Router() {
         { path: '/login', element: <LoginPage /> },
         { path: '/register', element: <Register /> },
         { path: '/user-profile', element: <PrivateRoute><UserProfilePage /></PrivateRoute> }, // protected route
+        { path: '/single-post', element: <PrivateRoute><SinglePost /></PrivateRoute> }, // protected route
+        { path: '/my-posts', element: <PrivateRoute><MyPosts /></PrivateRoute> }, // protected route
+        { path: '/write-post', element: <PrivateRoute><WritePost /></PrivateRoute> }, // protected route
+        { path: '/edit-post', element: <PrivateRoute><EditPost /></PrivateRoute> } // protected route
       ],
     },
     {
@@ -50,6 +54,11 @@ const LandingPage = Loadable(lazy(() => import('../pages/Landing')));
 const LoginPage = Loadable(lazy(() => import('../pages/Login')));
 const UserProfilePage = Loadable(lazy(() => import('../pages/UserProfile')));
 const NotFound = Loadable(lazy(() => import('../pages/Page404')));
-const Register = Loadable(lazy(() => import('../pages/Register')))
+const Register = Loadable(lazy(() => import('../pages/Register')));
+const SinglePost = Loadable(lazy(() => import('../pages/SinglePost')));
+const MyPosts = Loadable(lazy(() => import('../pages/MyPosts')));
+const WritePost = Loadable(lazy(() => import('../pages/WritePost')));
+const EditPost = Loadable(lazy(() => import('../pages/EditPost')));
+
 
 

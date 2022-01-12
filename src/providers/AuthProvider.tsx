@@ -15,7 +15,8 @@ const contextDefaultValues: TokenContextState = {
     },
     isAuth: false,
     updateUser: () => { },
-    updateToken: () => { },
+    logIn: () => { },
+    logOut: () => { }
 };
 
 export const TokenContext = createContext<TokenContextState>(
@@ -32,6 +33,7 @@ const AuthProvider: FC = ({ children }) => {
 
     // helper methods
     const updateUser = (newUser: {}) => { setUser(newUser) };
+    const navigate = useNavigate();
 
 
     // initialRender: validUserToken ? authorize : don't authorize
@@ -47,11 +49,16 @@ const AuthProvider: FC = ({ children }) => {
 
 
     // upon receiving a token, update global state and send user data request
-    const updateToken = (newToken: string) => {
+    const logIn = (newToken: string) => {
         localStorage.setItem('token', newToken)
         fetchUserData(newToken)
     };
 
+    // logOut 
+    const logOut = () => {
+        localStorage.removeItem('token')
+        navigate("/login")
+    }
 
     // fetch user profile data
     const fetchUserData = async (input: string) => {
@@ -73,7 +80,7 @@ const AuthProvider: FC = ({ children }) => {
 
 
     return (
-        <TokenContext.Provider value={{ user, isAuth, updateToken, updateUser }}>
+        <TokenContext.Provider value={{ user, isAuth, logIn, logOut, updateUser }}>
             {children}
         </TokenContext.Provider>
     )
