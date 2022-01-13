@@ -11,7 +11,12 @@ export default function useLogin<Type>(initialForm: Type) {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         alert(JSON.stringify(form))
-    }
+        const data = new FormData(e.currentTarget);
+        // eslint-disable-next-line no-console
+        console.log({
+            email: data.get('email'),
+            password: data.get('password'),
+    })}
 
     const emailValidation = (email: string) => {
         const regex =
