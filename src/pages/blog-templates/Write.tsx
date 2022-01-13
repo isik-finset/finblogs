@@ -14,8 +14,8 @@ const theme = createTheme;
 
 const Write = () => {
 
-    const { blog, handleChange, handleSubmit } = useBlog({ title: "", description: "", body: "" })
-    const { title, description, body } = blog;
+    const { blog, handleChange, handleSubmit } = useBlog({ title: "", description: "", body: "", topic: "" })
+    const { title, description, body, topic } = blog;
 
     return (
 
@@ -26,45 +26,58 @@ const Write = () => {
 
                 <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
                     <Grid container spacing={1}>
-                        <Grid item xs={12} sm={6}>
+                        <Grid item xs={12} >
                             <TextField
                                 variant="standard"
-                                autoComplete="given-name"
                                 name="title"
-                                required
-                                fullWidth
                                 id="title"
                                 label="Title"
+                                fullWidth
+                                required
                                 autoFocus
                                 value={title}
                                 onChange={handleChange}
                             />
                         </Grid>
-                        <Grid item xs={12} sm={6}>
+                        <Grid item xs={12}>
                             <TextField
                                 variant='standard'
+                                name="description"
+                                id="description"
+                                label="Description"
+                                placeholder="Write a short description..."
                                 multiline
                                 required
                                 fullWidth
-                                id="description"
-                                label="Description"
-                                name="description"
-                                autoComplete="Description"
                                 value={description}
                                 onChange={handleChange}
                             />
                         </Grid>
                         <Grid item xs={12}>
                             <TextField
-                                multiline
                                 variant="standard"
-                                required
-                                fullWidth
+                                name="body"
                                 id="body"
                                 label="Body"
-                                name="body"
-                                autoComplete="Tell your story..."
+                                multiline
+                                placeholder="Tell your story..."
+                                required
+                                fullWidth
                                 value={body}
+                                onChange={handleChange}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                variant="standard"
+                                id="topic"
+                                label="Topic"
+                                name="topic"
+                                placeholder="In a single word..."
+                                multiline
+                                required
+                                fullWidth
+                                value={topic}
                                 onChange={handleChange}
                             />
                         </Grid>

@@ -17,6 +17,7 @@ export default function useBlog<Type>(initialBlog: Type) {
             title: data.get('title'),
             description: data.get('description'),
             body: data.get('body'),
+            topic: data.get('topic'),
     })}
 
 
