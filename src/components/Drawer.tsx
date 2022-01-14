@@ -7,10 +7,10 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
 import useAuth from 'src/hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 
 const StyledLink = styled(Link)(({ theme }) => ({
     textDecoration: "none",
@@ -29,10 +29,16 @@ const drawerWidth = 280;
 const DrawerBar = () => {
     const [openDrawer, setOpenDrawer] = useState(false);
     const { isAuth, logOut } = useAuth();
+    const navigate = useNavigate();
 
     const bigLogOut = () => {
         setOpenDrawer(false);
         logOut();
+    };
+
+    const goHome = () => {
+        setOpenDrawer(false);
+        navigate("/landing");
     }
 
     return (
@@ -66,31 +72,28 @@ const DrawerBar = () => {
 
 
                     {!isAuth ? (
-                        <ListItem onClick={() => setOpenDrawer(false)}>
-                            <ListItemText>
-                                <StyledLink to="/login">Login</StyledLink>
-                            </ListItemText>
-                        </ListItem>
+                        <>
+                            <ListItem onClick={() => setOpenDrawer(false)}>
+                                <ListItemText>
+                                    <StyledLink to="/login">Login</StyledLink>
+                                </ListItemText>
+                            </ListItem>
+                            <Divider />
+                            <ListItem onClick={() => setOpenDrawer(false)}>
+                                <ListItemText>
+                                    <StyledLink to="/register">Register</StyledLink>
+                                </ListItemText>
+                            </ListItem>
+                        </>
                     ) : (
-                        <ListItem onClick={() => bigLogOut()}>
+                        <ListItem >
                             <ListItemText>
-                                <StyledLink to="/">Logout</StyledLink>
+                                <StyledLink onClick={() => bigLogOut()} to="/landing">Logout</StyledLink>
                             </ListItemText>
                         </ListItem>
                     )}
 
-                    <Divider />
 
-
-                    {!isAuth ? (
-                        <ListItem onClick={() => setOpenDrawer(false)}>
-                            <ListItemText>
-                                <StyledLink to="/register">Register</StyledLink>
-                            </ListItemText>
-                        </ListItem>
-                    ) : (
-                        null
-                    )}
 
                     <Divider />
                 </List>
@@ -98,8 +101,8 @@ const DrawerBar = () => {
             <IconButton onClick={() => setOpenDrawer(!openDrawer)} >
                 <MenuIcon />
             </IconButton>
-            <Typography variant="h4" sx={{ ml: "15px" }}>
-                BetterDay Blogs
+            <Typography onClick={() => goHome()} variant="h4" sx={{ ml: "15px", cursor: "pointer" }}>
+                BetterBlog
             </Typography>
         </>
     )

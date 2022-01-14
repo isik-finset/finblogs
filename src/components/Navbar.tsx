@@ -9,6 +9,8 @@ import Grid from '@mui/material/Grid'
 import { Link } from 'react-router-dom';
 import DrawerBar from './Drawer';
 // import Link from "src/theme/overrides/Link";
+import useAuth from 'src/hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 
 
 const StyledNavLink = styled("div")(({ theme }) => ({
@@ -40,6 +42,9 @@ const StyledTypography = styled(Typography)(({ theme }) => ({
 const Navbar = () => {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+    const { isAuth, logOut } = useAuth();
+    const navigate = useNavigate();
+
     return (
         <AppBar position='static' sx={{ alignItems: "left", width: '100%' }}>
             <CssBaseline />
@@ -48,7 +53,7 @@ const Navbar = () => {
                     <StyledNavLink sx={{ width: '100%' }}>
                         <Grid container sx={{ alignItems: 'center' }}>
                             <Grid item sm={2}>
-                                <StyledTypography itemType="button" variant="h4">
+                                <StyledTypography onClick={() => navigate("/landing")} itemType="button" variant="h4">
                                     BetterBlog
                                 </StyledTypography>
                             </Grid>
@@ -67,15 +72,23 @@ const Navbar = () => {
                                     Myposts
                                 </StyledLink>
 
+                                {!isAuth ? (
+                                    <>
+                                        <StyledLink to='/login'>
+                                            Login
+                                        </StyledLink>
 
-                                <StyledLink to='/login'>
-                                    Login
-                                </StyledLink>
 
+                                        <StyledLink to='/register'>
+                                            Register
+                                        </StyledLink>
+                                    </>
+                                ) : (
+                                    <StyledLink onClick={() => logOut()} to='/landing'>
+                                        Logout
+                                    </StyledLink>
+                                )}
 
-                                <StyledLink to='/register'>
-                                    Register
-                                </StyledLink>
                             </Grid>
                         </Grid>
                     </StyledNavLink>
