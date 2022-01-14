@@ -15,7 +15,7 @@ const Edit = () => {
     const { title, description, body, topic } = blog;
 
     return (
-        <Container>
+        <Container maxWidth="md">
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 5 }}>
                 <Grid container justifyContent="flex-end" sx={{ mb: 5 }} >
                     <Grid item sx={{ my: 2, mx: 0 }}>

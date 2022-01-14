@@ -1,23 +1,19 @@
-import React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import CssBaseline from '@mui/material/CssBaseline';
-import Typography from '@mui/material/Typography';
-import { styled, useTheme } from '@mui/material/styles';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import Grid from '@mui/material/Grid'
+// MUI
+import { AppBar, Toolbar, Typography, Grid, styled, useMediaQuery, useTheme } from '@mui/material';
+// router
 import { Link, useNavigate } from 'react-router-dom';
+// components
 import DrawerBar from './Drawer';
-// import Link from "src/theme/overrides/Link";
+// hooks
 import useAuth from 'src/hooks/useAuth';
 
-
+// ------------------------------------------------------------------------------
 
 const StyledNavLink = styled("div")(({ theme }) => ({
     // marginLeft: theme.spacing(1),
     display: "flex",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
 }))
 
 const StyledLink = styled(Link)(({ theme }) => ({
@@ -30,7 +26,7 @@ const StyledLink = styled(Link)(({ theme }) => ({
 
     "&:hover": {
         color: "yellow",
-        borderBottom: "1px solid white",
+        // borderBottom: "1px solid white",
     },
 }))
 
@@ -39,6 +35,8 @@ const StyledTypography = styled(Typography)(({ theme }) => ({
     cursor: "pointer"
 }))
 
+// ------------------------------------------------------------------------------
+
 const Navbar = () => {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down("md"));
@@ -46,8 +44,7 @@ const Navbar = () => {
     const navigate = useNavigate();
 
     return (
-        <AppBar position='static' sx={{ alignItems: "left", width: '100%' }}>
-            <CssBaseline />
+        <AppBar position='static' sx={{ justifyContent: "center", alignItems: "left", width: '100%', height: '5rem', backgroundColor: "black" }}>
             <Toolbar>
                 {isMobile ? <DrawerBar /> : (
                     <StyledNavLink sx={{ width: '100%' }}>
@@ -69,7 +66,7 @@ const Navbar = () => {
 
 
                                 <StyledLink to='/my-posts'>
-                                    Myposts
+                                    MyPosts
                                 </StyledLink>
 
                                 {!isAuth ? (
@@ -94,7 +91,6 @@ const Navbar = () => {
                     </StyledNavLink>
                 )
                 }
-
             </Toolbar>
         </AppBar>
     )
