@@ -24,7 +24,26 @@ const Edit = () => {
 
             <Container>
 
-                <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 10 }}>
+                <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 5 }}>
+                    <Grid container justifyContent="flex-end" sx={{ mb: 5 }} >
+                        <Grid item sx={{ margin: '0px' }}>
+                            <Button
+                                type="submit"
+                                variant="contained"
+                                sx={{ my: 2, mx: 0 }}
+                            >
+                                Save Changes
+                            </Button>
+                        </Grid>
+                        <Grid item sx={{ ml: '10px' }}>
+                            <Button
+                                variant="outlined"
+                                sx={{ my: 2, mx: 0 }}
+                            >
+                                Remove Blog
+                            </Button>
+                        </Grid>
+                    </Grid>
                     <Grid container spacing={10}>
                         <Grid item xs={12} >
                             <TextField
@@ -90,26 +109,6 @@ const Edit = () => {
                                         label="I want to receive inspiration, marketing promotions and updates via email."
                                     />
                                 </Grid> */}
-                    <Grid container >
-                        <Grid item xs={6} display="flex" alignItems="center" justifyContent="center">
-                            <Button
-                                type="submit"
-                                variant="contained"
-                                sx={{ my: 2, minWidth: '120px', maxWidth: '150px' }}
-                            >
-                                Save
-                            </Button>
-                        </Grid>
-                        <Grid item xs={6} display="flex" alignItems="center" justifyContent="center">
-                            <Button
-                                variant="outlined"
-                                sx={{ my: 2, minWidth: '120px', maxWidth: '150px' }}
-                            >
-                                Remove
-                            </Button>
-                        </Grid>
-
-                    </Grid>
                 </Box>
             </Container>
 
