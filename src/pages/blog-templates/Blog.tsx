@@ -29,39 +29,33 @@ const Blog = ({ props }: BlogProps) => {
     const { title, body, description, firstName, lastName, topic, readTime, createdAt } = props;
 
     return (
-        <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <Container maxWidth='lg' sx={{ display: 'flex', flexDirection: 'column', height: '100vh', marginBottom: '50px' }}>
-                <main>
-                    <ImageFeature post={imageFeaturePost} />
-                    <Divider sx={{ mb: '15px' }} />
-                    <Typography variant='h3' gutterBottom>
-                        {title}
-                    </Typography>
+        <Box paddingBottom="250px" >
+            <ImageFeature post={imageFeaturePost} />
+            <Divider sx={{ mb: '15px' }} />
+            <Typography variant='h3' gutterBottom>
+                {title}
+            </Typography>
 
-                    <Box>
-                        <Typography variant="caption">
-                            By {firstName} {lastName}
-                        </Typography>
-                        <br />
-                        <Typography variant="caption" color="text.secondary">
-                            {createdAt} ( {readTime} min read )
-                        </Typography>
-                    </Box>
-                    <Box my={3}>
-                        <Typography variant="h6" color="text.secondary">
-                            {description}
-                        </Typography>
-                    </Box>
-                    <Box >
-                        <Typography variant="body2" color="inherit" paragraph>
-                            {body}
-                        </Typography>
-                    </Box>
-                </main>
-            </Container>
-            <Footer />
-        </ThemeProvider>
+            <Box>
+                <Typography variant="caption">
+                    By {firstName} {lastName}
+                </Typography>
+                <br />
+                <Typography variant="caption" color="text.secondary">
+                    {createdAt} ( {readTime} min read )
+                </Typography>
+            </Box>
+            <Box my={3}>
+                <Typography variant="h6" color="text.secondary">
+                    {description}
+                </Typography>
+            </Box>
+            <Box >
+                <Typography variant="body2" color="inherit" paragraph>
+                    {body}
+                </Typography>
+            </Box>
+        </Box >
     )
 }
 

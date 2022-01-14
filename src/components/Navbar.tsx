@@ -48,8 +48,8 @@ const Navbar = () => {
                     <StyledNavLink sx={{ width: '100%' }}>
                         <Grid container sx={{ alignItems: 'center' }}>
                             <Grid item sm={2}>
-                                <StyledTypography variant="h4">
-                                    Finset Blogs
+                                <StyledTypography itemType="button" variant="h4">
+                                    BetterBlog
                                 </StyledTypography>
                             </Grid>
                             <Grid item sm={8} sx={{ display: "flex", justifyContent: 'center', alignItems: 'left' }} >
