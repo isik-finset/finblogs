@@ -3,12 +3,14 @@ import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
-import Divider from '@mui/material/Divider'
-import IconButton from '@mui/material/IconButton'
-import MenuIcon from '@mui/icons-material/Menu'
-import Typography from '@mui/material/Typography'
-import { styled } from '@mui/material/styles'
+import Divider from '@mui/material/Divider';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import { styled } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
+import useAuth from 'src/hooks/useAuth';
 
 const StyledLink = styled(Link)(({ theme }) => ({
     textDecoration: "none",
@@ -26,6 +28,12 @@ const drawerWidth = 280;
 
 const DrawerBar = () => {
     const [openDrawer, setOpenDrawer] = useState(false);
+    const { isAuth, logOut } = useAuth();
+
+    const bigLogOut = () => {
+        setOpenDrawer(false);
+        logOut();
+    }
 
     return (
         <>
@@ -55,17 +63,35 @@ const DrawerBar = () => {
                         </ListItemText>
                     </ListItem>
                     <Divider />
-                    <ListItem onClick={() => setOpenDrawer(false)}>
-                        <ListItemText>
-                            <StyledLink to="/login">Login</StyledLink>
-                        </ListItemText>
-                    </ListItem>
+
+
+                    {!isAuth ? (
+                        <ListItem onClick={() => setOpenDrawer(false)}>
+                            <ListItemText>
+                                <StyledLink to="/login">Login</StyledLink>
+                            </ListItemText>
+                        </ListItem>
+                    ) : (
+                        <ListItem onClick={() => bigLogOut()}>
+                            <ListItemText>
+                                <StyledLink to="/">Logout</StyledLink>
+                            </ListItemText>
+                        </ListItem>
+                    )}
+
                     <Divider />
-                    <ListItem onClick={() => setOpenDrawer(false)}>
-                        <ListItemText>
-                            <StyledLink to="/register">Register</StyledLink>
-                        </ListItemText>
-                    </ListItem>
+
+
+                    {!isAuth ? (
+                        <ListItem onClick={() => setOpenDrawer(false)}>
+                            <ListItemText>
+                                <StyledLink to="/register">Register</StyledLink>
+                            </ListItemText>
+                        </ListItem>
+                    ) : (
+                        null
+                    )}
+
                     <Divider />
                 </List>
             </Drawer>

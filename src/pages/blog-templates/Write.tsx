@@ -24,7 +24,18 @@ const Write = () => {
 
             <Container>
 
-                <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 10 }}>
+                <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 5 }}>
+                    <Grid container justifyContent="flex-end" sx={{ mb: 5 }}>
+                        <Grid item sx={{ my: 2 }}>
+                            <Button
+                                type="submit"
+                                fullWidth
+                                variant="contained"
+                            >
+                                Publish
+                            </Button>
+                        </Grid>
+                    </Grid>
                     <Grid container spacing={10}>
                         <Grid item xs={12} >
                             <TextField
@@ -91,14 +102,6 @@ const Write = () => {
                                     />
                                 </Grid> */}
 
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        sx={{ my: 10 }}
-                    >
-                        Publish
-                    </Button>
                 </Box>
             </Container>
 

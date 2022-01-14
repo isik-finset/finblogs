@@ -26,19 +26,17 @@ const Edit = () => {
 
                 <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 5 }}>
                     <Grid container justifyContent="flex-end" sx={{ mb: 5 }} >
-                        <Grid item sx={{ margin: '0px' }}>
+                        <Grid item sx={{ my: 2, mx: 0 }}>
                             <Button
                                 type="submit"
                                 variant="contained"
-                                sx={{ my: 2, mx: 0 }}
                             >
                                 Save Changes
                             </Button>
                         </Grid>
-                        <Grid item sx={{ ml: '10px' }}>
+                        <Grid item sx={{ my: 2, ml: "10px" }}>
                             <Button
                                 variant="outlined"
-                                sx={{ my: 2, mx: 0 }}
                             >
                                 Remove Blog
                             </Button>

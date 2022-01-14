@@ -60,7 +60,6 @@ export default function LandingPage() {
   }
   ]
 
-
   // useEffect(() => {
   //     axiosInstance
   //     .get('/api/account/posts')

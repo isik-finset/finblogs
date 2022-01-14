@@ -50,12 +50,14 @@ const AuthProvider: FC = ({ children }) => {
 
     // upon receiving a token, update global state and send user data request
     const logIn = (newToken: string) => {
+        setIsAuth(true);
         localStorage.setItem('token', newToken)
         fetchUserData(newToken)
     };
 
     // logOut 
     const logOut = () => {
+        setIsAuth(false);
         localStorage.removeItem('token')
         navigate("/login")
     }
