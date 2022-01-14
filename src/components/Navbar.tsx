@@ -44,51 +44,51 @@ const Navbar = () => {
     const navigate = useNavigate();
 
     return (
-        <AppBar position='static' sx={{ justifyContent: "center", alignItems: "left", width: '100%', height: '5rem', backgroundColor: "black" }}>
+        <AppBar position='static' sx={{ justifyContent: "center", alignItems: "stretch", width: '100%', height: '5rem', backgroundColor: "black" }}>
             <Toolbar>
                 {isMobile ? <DrawerBar /> : (
-                    <StyledNavLink sx={{ width: '100%' }}>
-                        <Grid container sx={{ alignItems: 'center' }}>
-                            <Grid item sm={2}>
-                                <StyledTypography onClick={() => navigate("/landing")} itemType="button" variant="h4">
-                                    BetterBlog
-                                </StyledTypography>
-                            </Grid>
-                            <Grid item sm={8} sx={{ display: "flex", justifyContent: 'center', alignItems: 'left' }} >
-                                <StyledLink to='/landing'>
-                                    Home
-                                </StyledLink>
 
-
-                                <StyledLink to='/write-post'>
-                                    Write
-                                </StyledLink>
-
-
-                                <StyledLink to='/my-posts'>
-                                    MyPosts
-                                </StyledLink>
-
-                                {!isAuth ? (
-                                    <>
-                                        <StyledLink to='/login'>
-                                            Login
-                                        </StyledLink>
-
-
-                                        <StyledLink to='/register'>
-                                            Register
-                                        </StyledLink>
-                                    </>
-                                ) : (
-                                    <StyledLink onClick={() => logOut()} to='/landing'>
-                                        Logout
-                                    </StyledLink>
-                                )}
-
-                            </Grid>
+                    <Grid container sx={{ alignItems: 'stretch' }}>
+                        <Grid item sm={2}>
+                            <StyledTypography onClick={() => navigate("/landing")} itemType="button" variant="h4">
+                                BetterBlog
+                            </StyledTypography>
                         </Grid>
-                    </StyledNavLink>
+                        <Grid item sx={{ display: "flex", justifyContent: 'center', alignItems: 'right' }} >
+                            <StyledLink to='/landing'>
+                                Home
+                            </StyledLink>
+
+
+                            <StyledLink to='/write-post'>
+                                Write
+                            </StyledLink>
+
+
+                            <StyledLink to='/my-posts'>
+                                MyPosts
+                            </StyledLink>
+
+                            {!isAuth ? (
+                                <>
+                                    <StyledLink to='/login'>
+                                        Login
+                                    </StyledLink>
+
+
+                                    <StyledLink to='/register'>
+                                        Register
+                                    </StyledLink>
+                                </>
+                            ) : (
+                                <StyledLink onClick={() => logOut()} to='/landing'>
+                                    Logout
+                                </StyledLink>
+                            )}
+
+                        </Grid>
+                    </Grid>
+
                 )
                 }
             </Toolbar>
