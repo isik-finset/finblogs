@@ -1,18 +1,20 @@
+// react
 import React, { useState, useEffect } from 'react';
-import { Box, Typography } from '@mui/material'
-import Page from 'src/components/Page';
+// MUI
+import { Box, Container } from '@mui/material'
+// axios
 import axiosInstance from 'src/utils/axios';
+// components
+import Page from 'src/components/Page';
+// templates
 import MyBlogs from './blog-templates/MyBlogs'
 import ImageFeature from './blog-templates/ImageFeature';
 import { imageFeaturePost } from './blog-templates/ImageFeaturePost';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import Container from '@mui/material/Container';
 import Footer from './blog-templates/Footer';
 
 
 
-
+// ------------------------------------------------------------------------------------
 interface MyPostsProps {
     id: string;
     createdAt: string;
@@ -24,12 +26,11 @@ interface MyPostsProps {
     readTime: string;
 };
 
+// ------------------------------------------------------------------------------------
 
 export default function MyPosts() {
 
     const [list, setList] = useState<MyPostsProps[]>([])
-
-    const theme = createTheme();
 
     const testProps = [{
         title: 'Most Americans Have No Clue What Immunocompromised Means',
@@ -51,7 +52,6 @@ export default function MyPosts() {
     },
     ]
 
-
     // useEffect(() => {
     //     axiosInstance
     //     .get('/api/account/myposts')
@@ -66,25 +66,17 @@ export default function MyPosts() {
 
     return (
         <Page title="Single Post Page">
-            <ThemeProvider theme={theme}>
-                <CssBaseline />
-                <Container maxWidth='md' sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-
-
-                    <Box>
-                        <ImageFeature post={imageFeaturePost} />
-                        {testProps.map((item, i, arr) => (
-                            <MyBlogs key={i} props={item} />
-                        )
-                        )}
-                    </Box>
-
-
-                </Container>
-                <Footer />
-            </ThemeProvider>
+            <Container maxWidth='md' sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+                <Box>
+                    <ImageFeature post={imageFeaturePost} />
+                    {testProps.map((item, i, arr) => (
+                        <MyBlogs key={i} props={item} />
+                    )
+                    )}
+                </Box>
+            </Container>
+            <Footer />
         </Page>
-
     )
 };
 

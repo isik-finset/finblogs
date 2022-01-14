@@ -1,14 +1,11 @@
-import CssBaseline from '@mui/material/CssBaseline';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import ImageFeature from './ImageFeature';
-import Typography from '@mui/material/Typography'
-import Divider from '@mui/material/Divider'
-import Box from '@mui/material/Box'
-import Footer from './Footer';
+// MUI
+import { Typography, Divider, Box } from '@mui/material'
+
+// template
 import { imageFeaturePost } from './ImageFeaturePost'
+import ImageFeature from './ImageFeature';
 
-
+// ------------------------------------------------------------------------------------
 interface BlogProps {
     props: {
         title: string;
@@ -22,7 +19,7 @@ interface BlogProps {
     }
 }
 
-const theme = createTheme();
+// ------------------------------------------------------------------------------------
 
 const Blog = ({ props }: BlogProps) => {
 

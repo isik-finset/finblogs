@@ -1,18 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import { Box, Typography } from '@mui/material'
-import Page from 'src/components/Page';
+// react
+import { useState, useEffect } from 'react';
+
+// axios
 import axiosInstance from 'src/utils/axios';
+
+// MUI
+import { Box } from '@mui/material'
+
+// components
+import Page from 'src/components/Page';
+
+// templates
 import Blogs from './blog-templates/LandingBlogs'
 import ImageFeature from './blog-templates/ImageFeature';
 import { imageFeaturePost } from './blog-templates/ImageFeaturePost';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
+
+
 import Container from '@mui/material/Container';
 import Footer from './blog-templates/Footer';
 
 
 
-
+// ------------------------------------------------------------------------------------
 interface LandingPageType {
   id: string;
   createdAt: string;
@@ -24,12 +33,11 @@ interface LandingPageType {
   readTime: string;
 };
 
+// ------------------------------------------------------------------------------------
 
 export default function LandingPage() {
 
   const [list, setList] = useState<LandingPageType[]>([])
-
-  const theme = createTheme();
 
   const testProps = [{
     title: 'Most Americans Have No Clue What Immunocompromised Means',
@@ -74,25 +82,17 @@ export default function LandingPage() {
 
   return (
     <Page title="Single Post Page">
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Container maxWidth='md' sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-
-
-          <Box>
-            <ImageFeature post={imageFeaturePost} />
-            {testProps.map((item, i, arr) => (
-              <Blogs key={i} props={item} />
-            )
-            )}
-          </Box>
-
-
-        </Container>
-        <Footer />
-      </ThemeProvider>
+      <Container maxWidth='md' sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+        <Box>
+          <ImageFeature post={imageFeaturePost} />
+          {testProps.map((item, i, arr) => (
+            <Blogs key={i} props={item} />
+          )
+          )}
+        </Box>
+      </Container>
+      <Footer />
     </Page>
-
   )
 };
 

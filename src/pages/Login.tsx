@@ -1,5 +1,12 @@
+// react
+import React, { useState } from 'react';
+// router
+import { useNavigate } from 'react-router-dom';
 // @mui
-import { Container, Typography, TextField, Box, Button, CssBaseline, Link, Grid } from '@mui/material';
+import { Container, Typography, TextField, Box, Button, Link, Grid } from '@mui/material';
+// styles
+import Avatar from '@mui/material/Avatar';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 // components
 import Page from '../components/Page';
 // hooks
@@ -7,16 +14,8 @@ import useLogin from 'src/hooks/useLogin';
 import useAuth from 'src/hooks/useAuth';
 // axios
 import axiosInstance from 'src/utils/axios';
-// react
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-// styles
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Avatar from '@mui/material/Avatar';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+// templates
 import Footer from './blog-templates/Footer';
-
-
 
 // ----------------------------------------------------------------------
 
@@ -26,15 +25,12 @@ import Footer from './blog-templates/Footer';
 // validation - login regex : done
 
 
-
-
 export default function LandingPage() {
-  const theme = createTheme();
+
   const defaultValues = {
     email: "",
     password: "",
   }
-
 
   const navigate = useNavigate();
 
@@ -67,7 +63,8 @@ export default function LandingPage() {
           console.log(result);
           logIn(result.data.accessToken)
           console.log(result.data.accessToken);
-          navigate('/user-profile')
+          // navigate('/user-profile')
+          navigate('/landing')
         }
       } catch (e) {
         alert('there is something wrong')
@@ -108,72 +105,68 @@ export default function LandingPage() {
     //   </Container>
     // </Page>
 
-    <ThemeProvider theme={theme}>
-      <Page title="Login Page">
-        <Container component="main" maxWidth="xs">
-          <CssBaseline />
-          <Box
-            sx={{
-              marginTop: 8,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-            }}
-          >
-            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-              <LockOutlinedIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5">
-              Sign in
-            </Typography>
-            <Box component="form" noValidate sx={{ mt: 1 }}>
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email" value={form.email} onChange={handleChange}
-                autoComplete="email"
-                autoFocus
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="password" value={form.password} onChange={handleChange}
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-              />
-              <Button
-                component="button"
-                onClick={onSubmit}
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-              >
-                Sign In
-              </Button>
-              <Grid container justifyContent={'center'}>
-                {/* <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid> */}
-                <Grid item>
-                  <Link href="/register" variant="body2">
-                    {"Don't have an account? Sign Up"}
-                  </Link>
-                </Grid>
+
+    <Page title="Login Page">
+      <Container component="main" maxWidth="xs">
+
+        <Box
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Avatar sx={{ m: 1, bgcolor: 'primary.light' }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign in
+          </Typography>
+          <Box component="form" noValidate sx={{ mt: 1 }}>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email" value={form.email} onChange={handleChange}
+              autoComplete="email"
+              autoFocus
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password" value={form.password} onChange={handleChange}
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+            />
+            <Button
+              component="button"
+              onClick={onSubmit}
+              fullWidth
+              variant="contained"
+              color="secondary"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Sign In
+            </Button>
+            <Grid container justifyContent={'center'}>
+              <Grid item>
+                <Link href="/register" variant="body2" color="secondary">
+                  {"Don't have an account? Sign Up"}
+                </Link>
               </Grid>
-            </Box>
+            </Grid>
           </Box>
-          <Footer />
-        </Container>
-      </Page>
-    </ThemeProvider >
+        </Box>
+        <Footer />
+      </Container>
+    </Page>
+
   );
 }
 

@@ -1,4 +1,6 @@
+// react
 import { Suspense, lazy, ElementType } from 'react';
+// router
 import { useRoutes } from 'react-router';
 import { Navigate } from 'react-router-dom';
 // layouts

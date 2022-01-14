@@ -1,7 +1,11 @@
+// react
 import React from 'react';
-import { Box } from '@mui/material'
+// components
 import Page from 'src/components/Page';
+// templates
 import Write from './blog-templates/Write';
+
+// ------------------------------------------------------------------------------------
 
 export default function WritePost() {
     return (

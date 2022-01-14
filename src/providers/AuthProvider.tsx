@@ -1,7 +1,12 @@
+// react
 import React, { useState, createContext, FC, useEffect } from 'react';
+// types
 import { TokenContextState } from 'src/types/types';
+// router
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from 'src/utils/axios';
+
+// ------------------------------------------------------------------------------------
 
 const contextDefaultValues: TokenContextState = {
     user: {
@@ -19,7 +24,9 @@ const contextDefaultValues: TokenContextState = {
     logOut: () => { }
 };
 
-export const TokenContext = createContext<TokenContextState>(
+// ------------------------------------------------------------------------------------
+
+export const AuthContext = createContext<TokenContextState>(
     contextDefaultValues
 );
 
@@ -82,9 +89,9 @@ const AuthProvider: FC = ({ children }) => {
 
 
     return (
-        <TokenContext.Provider value={{ user, isAuth, logIn, logOut, updateUser }}>
+        <AuthContext.Provider value={{ user, isAuth, logIn, logOut, updateUser }}>
             {children}
-        </TokenContext.Provider>
+        </AuthContext.Provider>
     )
 
 };

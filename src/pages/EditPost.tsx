@@ -1,7 +1,10 @@
-import React from 'react';
-import { Box } from '@mui/material'
+// components
 import Page from 'src/components/Page';
+
+// templates
 import Edit from './blog-templates/Edit';
+
+// ------------------------------------------------------------------------------------
 
 export default function EditPost() {
     return (

@@ -1,6 +1,10 @@
+// react
 import React from 'react';
-import { Paper, Typography, Grid, Link, Box } from '@mui/material';
 
+// MUI
+import { Paper, Typography, Grid, Box } from '@mui/material';
+
+// ------------------------------------------------------------------------------------
 interface ImageFeatureProps {
     post: {
         description: string;
@@ -10,10 +14,11 @@ interface ImageFeatureProps {
     };
 }
 
+// ------------------------------------------------------------------------------------
+
 const ImageFeature = (props: ImageFeatureProps) => {
+
     const { post } = props;
-
-
 
     return (
         <Paper
@@ -55,9 +60,6 @@ const ImageFeature = (props: ImageFeatureProps) => {
                         <Typography variant="h5" color="inherit" paragraph>
                             {post.description}
                         </Typography>
-                        {/* <Link variant="subtitle1" href="#">
-                            {post.linkText}
-                        </Link> */}
                     </Box>
                 </Grid>
             </Grid>

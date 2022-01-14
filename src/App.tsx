@@ -14,16 +14,6 @@ import Navbar from './components/Navbar';
 
 export default function App() {
 
-  // setGlobal State
-  // create useAuth hook to substitute const { isAuth } = useContext(TokenContext);
-
-
-  // const { isAuth } = useAuth();
-
-  // init protected routes
-  // const routes = useRoutes(Router(isAuth))
-
-
   return (
     <ThemeProvider>
       <ProgressBarStyle />

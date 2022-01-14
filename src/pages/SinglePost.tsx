@@ -1,13 +1,16 @@
+// react
 import React, { useState, useEffect } from 'react';
-import { Box, CssBaseline, Container } from '@mui/material'
-import Page from 'src/components/Page';
+// MUI
+import { Box, Container } from '@mui/material'
+// axios
 import axiosInstance from 'src/utils/axios';
+// components
+import Page from 'src/components/Page';
+// templates
 import SingleBlog from './blog-templates/SingleBlog'
 import Footer from './blog-templates/Footer';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
 
-
-
+// ------------------------------------------------------------------------------------
 interface BlogType {
     id: string;
     createdAt: string;
@@ -21,7 +24,7 @@ interface BlogType {
     readTime: string;
 };
 
-const theme = createTheme();
+// ------------------------------------------------------------------------------------
 
 export default function SinglePost() {
 
@@ -53,15 +56,12 @@ export default function SinglePost() {
 
     return (
         <Page title="Single Post Page">
-            <ThemeProvider theme={theme}>
-                <CssBaseline />
-                <Container maxWidth="md" sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }} >
-                    <Box>
-                        <SingleBlog props={testProps} />
-                    </Box>
-                </Container>
-                <Footer />
-            </ThemeProvider>
+            <Container maxWidth="md" sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }} >
+                <Box>
+                    <SingleBlog props={testProps} />
+                </Box>
+            </Container>
+            <Footer />
         </Page>
     )
 };

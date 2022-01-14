@@ -4,27 +4,25 @@ import './api/index';
 // scroll bar
 import 'simplebar/src/simplebar.css';
 
+// router
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 
-//
+// app
 import App from './App';
 
-
 // providers
-import TokenProvider from './providers'
+import AuthProvider from './providers'
 
 // ----------------------------------------------------------------------
 
 ReactDOM.render(
   <HelmetProvider>
     <BrowserRouter>
-      {/* // context provider should go in here */}
-      <TokenProvider>
+      <AuthProvider>
         <App />
-      </TokenProvider>
-      {/* // context provider should go in here */}
+      </AuthProvider>
     </BrowserRouter>
   </HelmetProvider>,
   document.getElementById('root')

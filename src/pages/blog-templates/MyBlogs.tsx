@@ -1,6 +1,9 @@
+// MUI
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 
+
+// ------------------------------------------------------------------------------------
 interface MyBlogsProps {
     props: {
         title: string;
@@ -12,6 +15,8 @@ interface MyBlogsProps {
         readTime: string;
     }
 }
+
+// ------------------------------------------------------------------------------------
 
 const MyBlogs = ({ props }: MyBlogsProps) => {
 

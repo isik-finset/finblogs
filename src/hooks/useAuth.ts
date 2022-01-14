@@ -1,9 +1,9 @@
-import { TokenContext } from "src/providers";
+import { AuthContext } from "src/providers";
 import { useContext } from "react";
 
 export default function useAuth () {
 
-    const { user, isAuth, updateUser, logIn, logOut } = useContext(TokenContext)
+    const { user, isAuth, updateUser, logIn, logOut } = useContext(AuthContext)
 
     return {
         user,
