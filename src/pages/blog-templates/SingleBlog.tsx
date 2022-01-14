@@ -29,7 +29,7 @@ const Blog = ({ props }: BlogProps) => {
     const { title, body, description, firstName, lastName, topic, readTime, createdAt } = props;
 
     return (
-        <Box paddingBottom="250px" >
+        <Box  >
             <ImageFeature post={imageFeaturePost} />
             <Divider sx={{ mb: '15px' }} />
             <Typography variant='h3' gutterBottom>

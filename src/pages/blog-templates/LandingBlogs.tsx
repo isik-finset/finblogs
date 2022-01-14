@@ -13,12 +13,12 @@ interface LandingPageBlogsProps {
     }
 }
 
-const LandingPageBlogs = ({ props }: LandingPageBlogsProps) => {
+const Blogs = ({ props }: LandingPageBlogsProps) => {
 
     const { title, description, firstName, lastName, topic, readTime, createdAt } = props;
 
     return (
-        <Box marginBottom={"20px"}>
+        <Box marginBottom="20px">
             <Typography variant="caption">
                 By {firstName} {lastName}
             </Typography>
@@ -35,4 +35,4 @@ const LandingPageBlogs = ({ props }: LandingPageBlogsProps) => {
     )
 }
 
-export default LandingPageBlogs;
+export default Blogs;

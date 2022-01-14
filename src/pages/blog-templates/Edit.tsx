@@ -12,7 +12,7 @@ import useBlog from 'src/hooks/useBlog';
 
 const theme = createTheme;
 
-const Write = () => {
+const Edit = () => {
 
     const { blog, handleChange, handleSubmit } = useBlog({ title: "", description: "", body: "", topic: "" })
     const { title, description, body, topic } = blog;
@@ -90,21 +90,32 @@ const Write = () => {
                                         label="I want to receive inspiration, marketing promotions and updates via email."
                                     />
                                 </Grid> */}
+                    <Grid container >
+                        <Grid item xs={6} display="flex" alignItems="center" justifyContent="center">
+                            <Button
+                                type="submit"
+                                variant="contained"
+                                sx={{ my: 2, minWidth: '120px', maxWidth: '150px' }}
+                            >
+                                Save
+                            </Button>
+                        </Grid>
+                        <Grid item xs={6} display="flex" alignItems="center" justifyContent="center">
+                            <Button
+                                variant="outlined"
+                                sx={{ my: 2, minWidth: '120px', maxWidth: '150px' }}
+                            >
+                                Remove
+                            </Button>
+                        </Grid>
 
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        sx={{ my: 10 }}
-                    >
-                        Publish
-                    </Button>
+                    </Grid>
                 </Box>
             </Container>
 
-        </ThemeProvider>
+        </ThemeProvider >
 
     )
 };
 
-export default Write;
+export default Edit;

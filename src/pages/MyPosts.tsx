@@ -1,16 +1,90 @@
-import React from 'react';
-import { Box } from '@mui/material'
+import React, { useState, useEffect } from 'react';
+import { Box, Typography } from '@mui/material'
 import Page from 'src/components/Page';
+import axiosInstance from 'src/utils/axios';
+import MyBlogs from './blog-templates/MyBlogs'
+import ImageFeature from './blog-templates/ImageFeature';
+import { imageFeaturePost } from './blog-templates/ImageFeaturePost';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import Container from '@mui/material/Container';
+import Footer from './blog-templates/Footer';
+
+
+
+
+interface MyPostsProps {
+    id: string;
+    createdAt: string;
+    firstName: string;
+    lastName: string;
+    title: string;
+    description: string;
+    topic: string
+    readTime: string;
+};
+
 
 export default function MyPosts() {
+
+    const [list, setList] = useState<MyPostsProps[]>([])
+
+    const theme = createTheme();
+
+    const testProps = [{
+        title: 'Most Americans Have No Clue What Immunocompromised Means',
+        description: 'Let’s understand who the immunocompromised are. And this is a very lazy description for the blog',
+        topic: 'React',
+        firstName: 'Mark',
+        lastName: 'Cuban',
+        createdAt: 'January 13, 2022',
+        readTime: '6'
+    },
+    {
+        title: 'Most Americans Have No Clue What Immunocompromised Means',
+        description: 'Let’s understand who the immunocompromised are. And this is a very lazy description for the blog',
+        topic: 'Vue',
+        firstName: 'Josh',
+        lastName: 'Cuban',
+        createdAt: 'January 13, 2022',
+        readTime: '6'
+    },
+    ]
+
+
+    // useEffect(() => {
+    //     axiosInstance
+    //     .get('/api/account/myposts')
+    //     .then(({ data }) => {
+    //         console.log(data);
+    //         setList(data.items);
+    //     })
+    //     .catch((e) => {
+    //         console.error(e);
+    //     });
+    // }, [])
+
     return (
-        <Page title="My Posts Page">
-            <Box>
-                <h1>
-                    My Posts Page
-                </h1>
-            </Box>
+        <Page title="Single Post Page">
+            <ThemeProvider theme={theme}>
+                <CssBaseline />
+                <Container maxWidth='md' sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+
+
+                    <Box>
+                        <ImageFeature post={imageFeaturePost} />
+                        {testProps.map((item, i, arr) => (
+                            <MyBlogs key={i} props={item} />
+                        )
+                        )}
+                    </Box>
+
+
+                </Container>
+                <Footer />
+            </ThemeProvider>
         </Page>
+
     )
 };
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Box, Typography } from '@mui/material'
 import Page from 'src/components/Page';
 import axiosInstance from 'src/utils/axios';
-import Blogs from './blog-templates/Blogs'
+import Blogs from './blog-templates/LandingBlogs'
 import ImageFeature from './blog-templates/ImageFeature';
 import { imageFeaturePost } from './blog-templates/ImageFeaturePost';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -77,7 +77,7 @@ export default function LandingPage() {
     <Page title="Single Post Page">
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Container maxWidth='lg' sx={{ display: 'flex', flexDirection: 'column', height: '100vh', marginBottom: '50px' }}>
+        <Container maxWidth='md' sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
 
 
           <Box>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Box, CssBaseline, Container } from '@mui/material'
 import Page from 'src/components/Page';
 import axiosInstance from 'src/utils/axios';
-import Blog from './blog-templates/Blog'
+import SingleBlog from './blog-templates/SingleBlog'
 import Footer from './blog-templates/Footer';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
@@ -55,9 +55,9 @@ export default function SinglePost() {
         <Page title="Single Post Page">
             <ThemeProvider theme={theme}>
                 <CssBaseline />
-                <Container >
+                <Container maxWidth="md" sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }} >
                     <Box>
-                        <Blog props={testProps} />
+                        <SingleBlog props={testProps} />
                     </Box>
                 </Container>
                 <Footer />
