@@ -25,6 +25,13 @@ import Footer from './blog-templates/Footer';
 // validation - login regex : done
 
 
+
+// 1: when page reloads, keep the user data! adjust context provider
+// 2. move fetch login from login page to context and make a function that can be user in login page
+// 3. remove token 
+// 4. improve validation  
+
+
 export default function LandingPage() {
 
   const defaultValues = {
@@ -41,7 +48,10 @@ export default function LandingPage() {
   // hooks
   const { logIn } = useAuth();
   const { form, handleChange, emailValidation } = useLogin(defaultValues);
+  //const { errors, isValid } = useForm(initValues, validationSchema)
+  // { name: { isRequired: true,  }, email: { isRequied: true, isEmail: true } }
 
+  
 
   // submit form -> validate -> login
   const onSubmit = async (e: React.MouseEvent<HTMLElement>) => {
